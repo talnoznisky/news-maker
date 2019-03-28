@@ -1,68 +1,69 @@
 import React, { Component } from 'react';
-import Titles from './Titles.js';
-import Search from './Search.js'
-import logo from './logo.svg';
+import Header from './Header.js'
+import Home from './Home.js'
+import { connect } from 'react-redux'
+import {reduceArticles, topicReducer} from './Actions'
 import './App.css';
 
+const API_KEY = `${process.env.REACT_APP_API_KEY} ` 
+
 class App extends Component {
-  constructor(){
-    super();
-    this.state = {
-      articles: [],
-      baseURL: 'https://newsapi.org/v2/',
-      searchValue: "apple"
-    }
-  }
 
   newsLoad = function(){
-    var url = this.state.baseURL +
+
+    var url = 'https://newsapi.org/v2/' +
               'top-headlines?' +
               'country=us&' +
-              'apiKey=7e2314a11db34335924170ac37132702'
+              'apiKey='+API_KEY;
 
     var req = new Request(url);
 
     fetch(req)
         .then(response => response.json()
           .then(data =>
-            this.setState({articles: data.articles})
+            this.props.reduceArticles(data.articles)
         ))
   }
 
-
-  newsSearch = function(){
-    var url = this.state.baseURL +
-              'everything?' +
-              'q=' + this.state.searchValue + '&' +
-              'from=2019-03-07&' +
-              'sortBy=popularity&' +
-              'apiKey=7e2314a11db34335924170ac37132702';
-
-    var req = new Request(url);
-
-    fetch(req)
-        .then(response => response.json()
-          .then(data =>
-            this.setState({articles: data.articles})
-        ))
-  }
-
-
-
-  componentWillMount(){
+  componentDidMount(){
     this.newsLoad()
   }
+
 
 
     render() {
       return (
         <div className="App">
-        <Search/>
-          {this.state.articles.map(function (e) { return<a href={e.url}><h2>{e.title}</h2></a> })}
+        <Header data={this.props.topics}/>
+          <Home data={this.props.articles}/>
         </div>
       );
     }
   }
 
+  const mapStateToProps = (state) => {
+        return {
+         articles: state.articleReducer,
+         topics: state.topicReducer
 
-export default App;
+        }
+    }
+
+  const mapDispatchToProps = (dispatch, ownProps) => {
+      return {
+          reduceArticles: (articles) =>{
+            dispatch(reduceArticles(articles))
+          }
+        }
+      }
+
+
+
+
+
+
+
+
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
