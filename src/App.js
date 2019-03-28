@@ -4,21 +4,21 @@ import Search from './Search.js'
 import logo from './logo.svg';
 import './App.css';
 
+const API_KEY = `${process.env.REACT_APP_API_KEY}`
 class App extends Component {
   constructor(){
     super();
     this.state = {
       articles: [],
-      baseURL: 'https://newsapi.org/v2/',
-      searchValue: "apple"
+      baseURL: 'https://newsapi.org/v2/'
     }
   }
 
-  newsLoad = function(){
+  newsLoad = async function(){
     var url = this.state.baseURL +
               'top-headlines?' +
               'country=us&' +
-              'apiKey=7e2314a11db34335924170ac37132702'
+              'apiKey='+API_KEY
 
     var req = new Request(url);
 
@@ -28,26 +28,6 @@ class App extends Component {
             this.setState({articles: data.articles})
         ))
   }
-
-
-  newsSearch = function(){
-    var url = this.state.baseURL +
-              'everything?' +
-              'q=' + this.state.searchValue + '&' +
-              'from=2019-03-07&' +
-              'sortBy=popularity&' +
-              'apiKey=7e2314a11db34335924170ac37132702';
-
-    var req = new Request(url);
-
-    fetch(req)
-        .then(response => response.json()
-          .then(data =>
-            this.setState({articles: data.articles})
-        ))
-  }
-
-
 
   componentWillMount(){
     this.newsLoad()

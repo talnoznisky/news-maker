@@ -1,17 +1,14 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
-import Button from './Button.js'
 import {reduceArticles, reduceTopics} from './Actions'
 
 const API_KEY = `${process.env.REACT_APP_API_KEY}`
-
 
 class Searches extends Component {
 
   newsSearch = async function(e){
 
     e.preventDefault();
-    console.log(e.target.value)
     this.setState({searchValue: document.getElementsByName('search')[0].value.toLowerCase()})
 
     let searchValue = document.getElementsByName('search')[0].value.toLowerCase()
@@ -38,7 +35,6 @@ class Searches extends Component {
   render() {
     return (
       <div class='row'>
-      {this.props.data.map(function(e){return <Button data={e}/>  })}
        <form class="form-inline my-2 my-lg-0 ml-auto" onSubmit={e => this.newsSearch(e)}>
          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search"/>
          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
