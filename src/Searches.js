@@ -4,11 +4,13 @@ import {reduceArticles, reduceTopics} from './Actions'
 
 const API_KEY = `${process.env.REACT_APP_API_KEY}`
 
+
 class Searches extends Component {
 
   newsSearch = async function(e){
 
     e.preventDefault();
+
     this.setState({searchValue: document.getElementsByName('search')[0].value.toLowerCase()})
 
     let searchValue = document.getElementsByName('search')[0].value.toLowerCase()
@@ -34,10 +36,10 @@ class Searches extends Component {
 
   render() {
     return (
-      <div class='row'>
-       <form class="form-inline my-2 my-lg-0 ml-auto" onSubmit={e => this.newsSearch(e)}>
-         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search"/>
-         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      <div className='row'>
+       <form className="form-inline my-2 my-lg-0 ml-auto" onSubmit={e => this.newsSearch(e)}>
+         <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search"/>
+         <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
        </form>
       </div>
     );
