@@ -1,3 +1,11 @@
+a, a:hover {
+  color: #0D1E3C;
+}
+
+a:visited {
+  color: #76818E
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -11,4 +19,48 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+input.form-control {
+  border-width: medium;
+  border-color: #0D1E3C;
+}
+
+p {
+  font-weight: bold;
+  margin-right: 1em;
+  font-size: 1.2em;
+}
+
+.icon {
+  width: 4em;
+  transform: rotateY(180deg);
+}
+
+.btn {
+  border: solid medium #0D1E3C;
+  border-radius: 2rem;
+  background-color: #B8FFFF;
+}
+
+.row{
+  padding:1em 0 0 1em;
+  text-align: left;
+  font-size: 1em;
+  background-color: #F9BFAB;
+  border-width: 1px 1px 0 1px;
+  border-style: dashed;
+  border-color:  #0D1E3C;
+}
+.row:nth-child(odd){
+  background-color: #B8FFFF;
+}
+
+.search-bar {
+  padding: 0;
+  display: flex;
+}
+
+.search-button {
+  width: 1em;
 }

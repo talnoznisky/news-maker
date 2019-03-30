@@ -36,7 +36,9 @@ class App extends Component {
       return (
         <div className="App" id="root">
         <Search />
-        {this.props.articles.map(function (e) { return<a href={e.url}><h2>{e.title}</h2></a> })}
+          <div class="container-fluid">
+          {this.props.articles.map(function (e) { return <div class="row"><a href={e.url}><p>{e.title}</p></a></div>})}
+          </div>
         </div>
       );
     }
