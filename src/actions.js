@@ -6,6 +6,6 @@ export function articleReducer(articles){
 
 export const REDUCE_TOPICS = 'REDUCE_TOPICS'
 
-export function reduceTopics(topics){
-  return {type: REDUCE_TOPICS, topics}
+export function topicReducer(searchValue){
+  return {type: REDUCE_TOPICS, searchValue}
 }

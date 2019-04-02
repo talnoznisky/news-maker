@@ -1,16 +1,17 @@
-import { REDUCE_TOPICS } from '../Actions'
+import { REDUCE_TOPICS } from '../actions'
 
 const initialUserState = {
     arr:[]
 }
 
-function reduceTopics(state = initialUserState, action){
+
+function topicReducer(state = initialUserState, action){
     switch(action.type){
         case REDUCE_TOPICS:{
-            return {
-                ...state,
-                  arr: [...state.arr, action.topic]
-                }
+            return{
+              ...state,
+              arr: [...state.arr, action.searchValue]
+            }
               }
               default: {
                   return state;
@@ -18,4 +19,4 @@ function reduceTopics(state = initialUserState, action){
               }
             }
 
-export default reduceTopics;
+export default topicReducer;

@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "http://talnoznisky.github.io/news-maker/",
   "dependencies": {
+    "enzyme": "^3.9.0",
     "gh-pages": "^2.0.1",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",

@@ -13,9 +13,18 @@ const API_KEY = `${process.env.REACT_APP_API_KEY}`
 
 class App extends Component {
 
+  getURL(){
+    if(process.env.NODE_ENV == 'development'){
+      console.log('dev')
+       return 'https://gist.githubusercontent.com/talnoznisky/1d04a8cc4c812ce70ecb3b2d57bce7d8/raw/472e33d12d843e2359f5877679eafa85299927af/top-headlines.json'
+    }else{
+      console.log('prod')
+      return 'https://newsapiwrapper.herokuapp.com/v1/all'
+    }
+  }
   newsLoad = async function(){
-    let url = 'https://newsapiwrapper.herokuapp.com/v1/all'
-    var req = new Request(url);
+
+    var req = new Request(this.getURL());
     fetch(req)
         .then(response => response.json()
           .then(data =>
@@ -36,10 +45,11 @@ class App extends Component {
           <div>
           </div>
         </div>
+
       );
     }
   }
-
+console.log(process.env.NODE_ENV)
 
   const mapStateToProps = (state) => {
       return {

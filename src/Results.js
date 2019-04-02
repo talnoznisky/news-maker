@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {NavLink, withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {articleReducer, reduceTopics} from './actions'
+import {articleReducer} from './actions'
 
 class Results extends Component {
 //this.props.data.map(function (e) { return <div class="row"><a href={e.url}><p>{e.title}</p></a></div>})}
@@ -9,7 +9,7 @@ class Results extends Component {
 
     return (
       <div class="container-fluid">
-        {this.props.articles.map(function (e) { return <div class="row"><a href={e.url}><p>{e.title}</p></a></div>})}}
+        {this.props.articles.map(function (e) { return <div class="row"><a href={e.url}><p>{e.title}</p></a></div>})}
       </div>
     );
   }
@@ -18,8 +18,7 @@ class Results extends Component {
 
 const mapStateToProps = (state) => {
     return {
-     articles: state.articleReducer,
-     searchValue: state.searchValue
+     articles: state.articleReducer
     }
 }
 
@@ -27,9 +26,6 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         articleReducer: (articles) =>{
           dispatch(articleReducer(articles))
-        },
-          reduceTopics: (topics) => {
-            dispatch(reduceTopics(topics))
           }
         }
       }
