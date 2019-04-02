@@ -1,21 +1,17 @@
 import React, { Component } from 'react';
-import Titles from './Titles.js';
-import Search from './Search.js'
+import Search from './Search.js';
+import Results from './Results.js'
 import logo from './logo.svg';
 import './App.css';
 import {connect} from 'react-redux';
-import {reduceArticles} from './actions'
+import {articleReducer} from './actions'
+import {Switch, Route, withRouter} from 'react-router-dom'
+
 
 
 const API_KEY = `${process.env.REACT_APP_API_KEY}`
 
 class App extends Component {
-  constructor(){
-    super();
-    this.state = {
-      articles: []
-    }
-  }
 
   newsLoad = async function(){
     let url = 'https://newsapiwrapper.herokuapp.com/v1/all'
@@ -23,9 +19,9 @@ class App extends Component {
     fetch(req)
         .then(response => response.json()
           .then(data =>
-            this.props.reduceArticles(data.articles)
+            this.props.articleReducer(data.articles)
         ))
-  }
+      }
 
   componentWillMount(){
     this.newsLoad()
@@ -35,9 +31,9 @@ class App extends Component {
     render() {
       return (
         <div className="App" id="root">
-        <Search />
-          <div class="container-fluid">
-          {this.props.articles.map(function (e) { return <div class="row"><a href={e.url}><p>{e.title}</p></a></div>})}
+          <Search />
+          <Results />
+          <div>
           </div>
         </div>
       );
@@ -48,14 +44,14 @@ class App extends Component {
   const mapStateToProps = (state) => {
       return {
        articles: state.articleReducer
-      }
+    }
   }
 
   const mapDispatchToProps = (dispatch, ownProps) => {
       return {
-          reduceArticles: (articles) =>{
-            dispatch(reduceArticles(articles))
-            }
+          articleReducer: (articles) =>{
+            dispatch(articleReducer(articles))
+          }
           }
         }
 

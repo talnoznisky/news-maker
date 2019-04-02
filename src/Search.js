@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {reduceArticles} from './actions';
+import {articleReducer, reduceTopics} from './actions';
 import {connect} from 'react-redux';
 import {NavLink, withRouter} from 'react-router-dom';
 
@@ -10,14 +10,14 @@ class Search extends Component {
     e.preventDefault();
     let searchValue = document.getElementsByName('search')[0].value.toLowerCase();
     this.setState({searchValue: searchValue});
-
+    this.props.reduceTopics(searchValue)
     let url = 'https://newsapiwrapper.herokuapp.com/v1/search?q='+searchValue
     let req = new Request(url);
 
     fetch(req)
         .then(response => response.json()
           .then(data =>
-            this.props.reduceArticles(data.articles)
+            this.props.articleReducer(data.articles)
         ))
         this.props.history.push('search=' + searchValue);
   }
@@ -46,14 +46,18 @@ class Search extends Component {
 }
 const mapStateToProps = (state) => {
     return {
-     articles: state.reduceArticles
+     articles: state.articleReducer,
+     searchValue: state.searchValue
     }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        reduceArticles: (articles) =>{
-          dispatch(reduceArticles(articles))
+        articleReducer: (articles) =>{
+          dispatch(articleReducer(articles))
+        },
+          reduceTopics: (topics) => {
+            dispatch(reduceTopics(topics))
           }
         }
       }
