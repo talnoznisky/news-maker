@@ -49,7 +49,6 @@ class App extends Component {
       );
     }
   }
-console.log(process.env.NODE_ENV)
 
   const mapStateToProps = (state) => {
       return {
