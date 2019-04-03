@@ -5,45 +5,26 @@ import {NavLink, withRouter} from 'react-router-dom';
 
 class Search extends Component {
 
-  getURL(searchValue){
-    if(process.env.NODE_ENV == 'development'){
-      console.log('dev')
-       return 'https://gist.githubusercontent.com/talnoznisky/44fbc43b6b359b5aa7051c8c994dd8d2/raw/d8db235fa59104e926a69fee4e8d1694f4d4b81e/apple.json'
-    }else{
-      console.log('prod')
-      return 'https://newsapiwrapper.herokuapp.com/v1/search?q='+searchValue
-    }
-  }
 
-  newsSearch = async function(e){
-    e.preventDefault();
-    let searchValue = document.getElementsByName('search')[0].value.toLowerCase();
-    this.props.topicReducer(searchValue)
 
-    let req = new Request(this.getURL(searchValue));
-    fetch(req)
-        .then(response => response.json()
-          .then(data =>
-            this.props.articleReducer(data.articles)
-        ))
-        this.setState({
-          articles: this.props.articles,
-          searchValue: searchValue
-        })
-        this.props.history.push('/search/'+searchValue);
-
+    newQueryTerm = async function(e){
+      e.preventDefault();
+      let newSearchValue = document.getElementsByName('search')[0].value.toLowerCase();
+      console.log('search component set: ' + newSearchValue)
+      this.props.topicReducer(newSearchValue)
+      this.props.history.push('/results/'+newSearchValue);
     }
 
   render() {
       return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
-      <div><img className="img-fluid icon" type="image/png" src="newspaper.svg"/></div>
+      <div><img className="img-fluid icon" type="image/png" src="./newspaper.svg"/></div>
       <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span className="navbar-toggler-icon"></span>
       </button>
 
     <div className="collapse navbar-collapse" id="navbarSupportedContent">
-      <form className="form-inline my-2 my-lg-0 ml-auto" onSubmit={e => this.newsSearch(e)}>
+      <form className="form-inline my-2 my-lg-0 ml-auto" onSubmit={e => this.newQueryTerm(e)}>
         <div className="container-fluid search-bar align-items-center">
           <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search"/>
           <button className="btn ml-2 ml-sm-0" type="submit"><img className="img-fluid search-button" src="search.svg"/></button>
