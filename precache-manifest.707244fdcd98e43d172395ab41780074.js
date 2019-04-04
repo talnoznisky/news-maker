@@ -20,7 +20,7 @@ self.__precacheManifest = [
     "url": "/news-maker/static/media/logo.5d5d9eef.svg"
   },
   {
-    "revision": "8ad668a8c41d6904eec41c7593ff182e",
+    "revision": "cfc64c570aa060702540ee4d2d53b68a",
     "url": "/news-maker/index.html"
   }
 ];
