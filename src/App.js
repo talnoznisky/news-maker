@@ -9,13 +9,15 @@ import {articleReducer} from './actions'
 import {Switch, Route, withRouter} from 'react-router-dom'
 
 class App extends Component {
+
     render() {
+      console.log('v1.0.1 loaded - trying routerProps 4')
       return (
         <div className="App" id="root">
           <Search/>
           <Switch>
-            <Route path="/" exact component={Home}/>
-            <Route path="/results/:term" component={Results}/>
+            <Route exact path={`/`} render={ (routerProps) => < Home routerProps={routerProps}/>} />
+            <Route path='/results/:term' component={Results}/>
           </Switch>
           <div>
           </div>

@@ -18,7 +18,7 @@ class Search extends Component {
   render() {
       return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
-      <div><img className="img-fluid icon" type="image/png" src="./newspaper.svg"/></div>
+      <div><img className="img-fluid icon" type="image/svg+xml" src={process.env.PUBLIC_URL + '/newspaper.svg'}/></div>
       <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span className="navbar-toggler-icon"></span>
       </button>
@@ -27,7 +27,7 @@ class Search extends Component {
       <form className="form-inline my-2 my-lg-0 ml-auto" onSubmit={e => this.newQueryTerm(e)}>
         <div className="container-fluid search-bar align-items-center">
           <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search"/>
-          <button className="btn ml-2 ml-sm-0" type="submit"><img className="img-fluid search-button" src="search.svg"/></button>
+          <button className="btn ml-2 ml-sm-0" type="submit"><img className="img-fluid search-button" src={process.env.PUBLIC_URL + "/search.svg"}/></button>
         </div>
       </form>
     </div>
